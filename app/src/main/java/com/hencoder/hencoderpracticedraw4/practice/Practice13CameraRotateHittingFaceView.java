@@ -47,6 +47,8 @@ public class Practice13CameraRotateHittingFaceView extends View {
         animator.setDuration(5000);
         animator.setInterpolator(new LinearInterpolator());
         animator.setRepeatCount(ValueAnimator.INFINITE);
+
+        camera.setLocation(camera.getLocationX(), camera.getLocationY(), camera.getLocationZ() - 100);
     }
 
     @Override

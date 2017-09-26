@@ -31,15 +31,32 @@ public class Practice02ClipPathView extends View {
         super(context, attrs, defStyleAttr);
     }
 
+    private Path path1;
+
+    private Path path2;
+
     {
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.maps);
+        path1 = new Path();
+        path1.addCircle(bitmap.getWidth() / 2 + point1.x, bitmap.getHeight() / 2 + point1.y, Math.min(bitmap.getWidth(), bitmap.getHeight()) / 2, Path.Direction.CW);
+
+        path2 = new Path();
+        path2.setFillType(Path.FillType.INVERSE_EVEN_ODD);
+        path2.addCircle(bitmap.getWidth() / 2 + point2.x, bitmap.getHeight() / 2 + point2.y, Math.min(bitmap.getWidth(), bitmap.getHeight()) / 2, Path.Direction.CW);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        canvas.save();
+        canvas.clipPath(path1);
         canvas.drawBitmap(bitmap, point1.x, point1.y, paint);
+        canvas.restore();
+
+        canvas.save();
+        canvas.clipPath(path2);
         canvas.drawBitmap(bitmap, point2.x, point2.y, paint);
+        canvas.restore();
     }
 }
